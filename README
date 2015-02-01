@@ -1,0 +1,36 @@
+This is the implementation of the KLA and CA algorithms for mapping stream programs onto distributed systems. 
+
+- Requirements:
+  + GSL - GNU Scientific Library https://www.gnu.org/software/gsl/
+
+- To compile: make
+- To run:
+    ./partition -gf <graph_file> -tf <target_file> -m <method> -of <output_file>
+
+- Format of graph file:
+  + First line: <number of task (let call N)>
+  + Next N lines: 
+    <task id/name of task 1> <weight/execution time of task 1>
+    ...
+    <task id/name of task N> <weight/execution time of task N> 
+  
+  + Next is an NxN matrix where element (i, j) is the weight of stream connecting task i and task j
+  
+  
+- Format of target file:
+  + First line: <number of processing element (let call P)>
+  + Second line: P elements, each show the capacity/number of cores of each processing element
+  + Next is an PxP matrix where element (i, j) is the bandwidth of the channel connecting processing element j and processing element j
+
+- Output file will be formatted as follows:
+ + First line: < number of task (let call N)>
+ + Next N lines:
+    <task id/name of task 1> <index of machine task 1 is mapped to>
+    ...
+    <task id/name of task N> <index of machine task N is mapped to>
+
+- Method:
+  + 1: CA
+  + 2: KLA
+  + default: CA
+
